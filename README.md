@@ -21,3 +21,5 @@ If I track matches on the 'maybe' lists, then I can throw in some of those names
 I would like to add the capability to manually enter a name as well, and probably keep it in a separate category and ensure that they also enter the ranking algorithm of the both agreed names, since anything manually entered might not have showed up on the other parents list yet, and the parent that entered it probably has some emotional attachment to it.
 
 That's more or less it.  If that is confusing, or you want to ask how I can meet a specific requirement for grading, just let me know.
+
+Also, I'm definitely calling this Tinder Tots.  It's clever, makes sense, and is borderline inappropriate, which makes it a perfect name!
