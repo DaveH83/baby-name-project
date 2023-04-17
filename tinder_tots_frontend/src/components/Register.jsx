@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { registerUser } from "../Utilities"
 
 
@@ -9,6 +10,8 @@ export const Register = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    const navigate = useNavigate()
+
     return(
         
         <form
@@ -18,6 +21,8 @@ export const Register = () => {
                     setEmail(""),
                     setPassword(""),
                     setName(""),
+                    navigate('/')
+                    
                 ]}
                 style={{ display: "flex", flexDirection: "column" }}
             >
@@ -40,6 +45,5 @@ export const Register = () => {
             />
             <input type="submit" value="Register" />
         </form>
-        
     )
 }
