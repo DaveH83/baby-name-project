@@ -11,7 +11,7 @@ class App_User(AbstractUser):
     other_parent = models.IntegerField(null = True, blank = True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return f"{self.email} | {self.name}"
