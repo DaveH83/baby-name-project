@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+
 export const currUser = async() =>{
     let response = await axios.get('/user/curruser/')
     // console.log(response.data)
@@ -33,4 +34,11 @@ export const logoutUser = async(setUser) => {
     if(response.data.logout){
         setUser(null)
     }
+}
+
+
+export const getDadJoke = async() => {
+    let response = await axios.get('/user/dadjoke')
+    
+    return response.data.joke
 }

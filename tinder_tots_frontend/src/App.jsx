@@ -20,14 +20,13 @@ function App() {
     getCurrUser()
   }, [])
 
-
+ 
 
   return (
     <div className="App">
+
       <UserContext.Provider value = {{user, setUser}} >
         <NavBar />
-      </UserContext.Provider>
-      <UserContext.Provider value = {{user, setUser}} >
         <Outlet />
       </UserContext.Provider>
     </div>

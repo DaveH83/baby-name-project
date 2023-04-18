@@ -4,6 +4,11 @@ from django.contrib.auth import authenticate, login, logout
 from .models import App_User 
 from django.core.serializers import serialize
 import json
+import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Create your views here.
 
@@ -67,3 +72,21 @@ def logout_user(request):
     except Exception as e:
         print(e)
         return JsonResponse({"logged_out": False})
+    
+
+@api_view(["GET"])
+def dad_joke(request):
+    
+    api_url = 'https://api.api-ninjas.com/v1/dadjokes?limit=1'
+    response = requests.get(api_url, headers={'X-Api-Key': os.environ['dad_joke_api_key']})
+    
+    
+
+    if response.status_code == requests.codes.ok:
+        joke = response.text.split(':', 1)
+        joke = joke[1].split('}')
+                
+        return JsonResponse({'joke': joke[0]})
+    else:
+        print("Error:", response.status_code, response.text)
+        return JsonResponse({"dad_joke":["Error", response.status_code]})

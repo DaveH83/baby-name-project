@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import {Link} from "react-router-dom"
 import { UserContext } from "../App"
 import { logoutUser } from "../Utilities"
@@ -9,10 +9,7 @@ export const NavBar = () => {
     const {user} = useContext(UserContext)
     const {setUser} = useContext(UserContext)
 
-    
-    console.log(user)
-    
-    
+      
     return(
         <nav>
             <h3>Tinder Tots</h3>
@@ -20,8 +17,8 @@ export const NavBar = () => {
            
             <Link to={'/register/'}>Register</Link>
 
-            {user && <button onClick={()=>logoutUser(setUser)}>LOG OUT</button>}
-
+            {user['email'] && <button onClick={()=>logoutUser(setUser)}>LOG OUT</button>}
+            <hr />
         </nav>
     )
 }
