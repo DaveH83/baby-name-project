@@ -21,10 +21,11 @@ def send_index(request):
 def curr_user(request):
     
     if request.user.is_authenticated:
-        print(request.user)
-        user_info = serialize("json",  [request.user], fields = ['name', 'email'])
+        print('curr_user function call:', request.user.username)
+        user_info = serialize("json",  [request.user], fields = ['id', 'name', 'email', 'username', 'session_id', 'other_parent', 'parent_num', 'session_invite', 'baby_gender'])
         user_info_workable = json.loads(user_info)
         return JsonResponse(user_info_workable[0]['fields'])
+
     else:
         return JsonResponse({"user":None})
     
@@ -74,14 +75,85 @@ def logout_user(request):
         return JsonResponse({"logged_out": False})
     
 
+@api_view(["POST"])
+def create_session(request):
+    try:
+        username = request.data['username']
+        gender = request.data['gender']
+        otherParent = request.data['otherParent']
+        
+        user = App_User.objects.get(username = username)
+        user2 = App_User.objects.get(username = otherParent)
+                
+        user.session_id = int(f"{user.id}{user2.id}")
+        user.baby_gender = gender
+        user.save()
+
+        user2.session_invite = user.username
+        user2.save()
+                
+        return JsonResponse({'success': True})
+
+    except Exception as e:
+        print(e)
+        return JsonResponse({'success': False})
+    
+
+
+@api_view(["POST"])
+def invite_accept(request):
+
+    try:
+        action = request.data['action']
+        invitee = App_User.objects.get(username = request.data['invitee'])
+        inviter = App_User.objects.get(username = request.data['inviter'])
+
+        print('action: ', action)
+        print('invitee before: \n', invitee)
+        print('inviter before: \n', inviter)
+        
+        if action == 'accept':
+            invitee.session_id = inviter.session_id
+            invitee.other_parent = inviter.username
+            invitee.session_invite = None
+            invitee.parent_num = 2
+            invitee.baby_gender = inviter.baby_gender
+            invitee.save()
+
+            inviter.other_parent = invitee.username
+            inviter.parent_num = 1
+            inviter.save()
+
+            
+            print('invitee: after\n', invitee)
+            print('inviter: after\n', inviter)
+
+            return JsonResponse({'action': 'accepted'})
+            
+        elif action == 'reject':
+            invitee.session_invite = None
+            invitee.save()
+
+            inviter.session_id = None
+            inviter.baby_gender = None
+            inviter.save()
+
+            print(action)
+            print('invitee: after\n', invitee)
+            print('inviter: after\n', inviter)
+
+            return JsonResponse({'action': 'rejected'})
+
+    except Exception as e:
+        print(e)
+        return JsonResponse({'success': False})
+
 @api_view(["GET"])
 def dad_joke(request):
     
     api_url = 'https://api.api-ninjas.com/v1/dadjokes?limit=1'
     response = requests.get(api_url, headers={'X-Api-Key': os.environ['dad_joke_api_key']})
     
-    
-
     if response.status_code == requests.codes.ok:
         joke = response.text.split(':', 1)
         joke = joke[1].split('}')

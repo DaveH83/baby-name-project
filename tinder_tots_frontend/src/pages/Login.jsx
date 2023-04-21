@@ -19,7 +19,7 @@ export const Login = () => {
             setDadJoke(await getDadJoke())
         }
         awaitDadJoke()
-        console.log(dadJoke)
+        
       }, []);
 
       
@@ -33,6 +33,7 @@ export const Login = () => {
             loginUser(email, password, setUser),
             setEmail(""),
             setPassword(""),
+            navigate('/home/')
         ]}
         >
         <h3>Log In</h3>

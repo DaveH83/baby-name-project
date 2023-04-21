@@ -1,0 +1,42 @@
+[
+    {
+        "model": "book_app.author",
+        "pk": 1, 
+        "fields": {
+            "first_name": "Francisco", 
+            "last_name": "Avila"
+        }
+    }, 
+    {
+        "model": "book_app.author", 
+        "pk": 2, 
+        "fields": {
+            "first_name": "Adam", 
+            "last_name": "Cahan"
+        }
+    }, 
+    {
+        "model": "book_app.author", 
+        "pk": 3, 
+        "fields": {
+            "first_name": "Benjamin", 
+            "last_name": "Cohen"
+        }
+    }, 
+    {
+        "model": "book_app.author", 
+        "pk": 4, 
+        "fields": {
+            "first_name": "Natanel", 
+            "last_name": "TA"
+        }
+    }, 
+    {
+        "model": "book_app.author", 
+        "pk": 5, 
+        "fields": {
+            "first_name": "Skyler", 
+            "last_name": "TA"
+        }
+    }
+]

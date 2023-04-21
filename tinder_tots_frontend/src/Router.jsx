@@ -1,7 +1,9 @@
 import App from "./App";
-import { createHashRouter } from "react-router-dom";
-import { Login } from "./components/Login"
-import { Register } from "./components/Register"
+import { createHashRouter } from "react-router-dom"
+import { Login } from "./pages/Login"
+import { Register } from "./pages/Register"
+import { Homepage } from "./pages/Homepage"
+import { Setup } from "./components/Setup"
 
 const Router = createHashRouter([{
     path: '/',
@@ -14,6 +16,14 @@ const Router = createHashRouter([{
         {
             path: '/register/',
             element: <Register />
+        },
+        {
+            path: '/home/',
+            element: <Homepage />
+        },
+        {
+            path: '/setup/',
+            element: <Setup />
         },
     ]
 }])
