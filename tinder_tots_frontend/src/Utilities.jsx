@@ -19,13 +19,13 @@ export const registerUser = async(name, email, password) => {
 }
 
 
-export const loginUser = async(email, password) => {
+export const loginUser = async(email, password, setUser) => {
     let response = await axios.post('/user/login/' , {
         'email': email,
         'password': password
     })
     // console.log(response.data.logged_in)
-    return response.data.logged_in
+    setUser(response.data)
 }
 
 
@@ -37,8 +37,44 @@ export const logoutUser = async(setUser) => {
 }
 
 
+export const createSession = async(gender, otherParent, user) =>{
+    console.log(gender, otherParent, user.name)
+    let response = await axios.post('user/createsession/', {
+        'username': user.email,
+        'gender': gender,
+        'otherParent': otherParent,
+    })
+    // console.log('response:', response.data)
+    return response.data.test
+}
+
+
+export const acceptInvite = async(invitee, inviter) =>{
+    // console.log(invitee, inviter)
+    let response = await axios.post('user/inviteaccept/', {
+        'invitee': invitee,
+        'inviter': inviter,
+        'action': 'accept',
+    })
+    
+    console.log(response.data)
+}
+
+
+export const rejectInvite = async(invitee, inviter, setUpdate, update) =>{
+    // console.log(invitee, inviter)
+    let response = await axios.post('user/inviteaccept/', {
+        'invitee': invitee,
+        'inviter': inviter,
+        'action': 'reject',
+    })
+    console.log(response.data)
+    setUpdate(!update)
+}
+
+
 export const getDadJoke = async() => {
-    let response = await axios.get('/user/dadjoke')
+    let response = await axios.get('/user/dadjoke/')
     
     return response.data.joke
 }

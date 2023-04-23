@@ -8,10 +8,12 @@ class App_User(AbstractUser):
     name = models.CharField(max_length = 255, null = False, blank = False)
     session_id = models.IntegerField(null = True, blank = True)
     parent_num = models.IntegerField(null = True, blank = True)
-    other_parent = models.IntegerField(null = True, blank = True)
+    other_parent = models.CharField(null = True, blank = True)
+    session_invite = models.CharField(max_length= 255, null = True, blank = True)
+    baby_gender = models.CharField(max_length=1, null=True, blank=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return f"{self.email} | {self.name}"
+        return f"**************\nuser e-mail address: {self.email}\nuser name: {self.name}\nsession_id: {self.session_id}\nother parent: {self.other_parent}\nsession invite: {self.session_invite}\nbaby gender: {self.baby_gender}\n**************"
