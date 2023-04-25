@@ -1,34 +1,23 @@
-import { useContext, useState, useEffect } from "react"
+import { useContext} from "react"
 import { useNavigate } from "react-router-dom"
-import { UserContext } from "../App"
-import UserCard from "../components/UserCard"
+import { UserContext, NameContext } from "../App"
 import { Setup } from "../components/Setup"
+import UserCard from "../components/UserCard"
+import NameDisplays from "../components/NameDisplays"
 
 export const Homepage = () => {
 
-    // const [nameDB, setNameDB] = useState(null)
-    const [sessionId, setSessionId] = useState(null)
-    const [otherParent, setOtherParent] = useState(null)
-    const {user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
+  const {session} = useContext(NameContext)
+  const navigate = useNavigate()
 
-    // useEffect(() => {
-    //     const getNameDB = async () => {
-    //       setNameDB(await pullNames())
-    //     }
-    //     getNameDB()
-    //   }, [])
-
-      // console.log(nameDB)
-
-  console.log(user)
-
-    return(
-        <>
-        
-          <h1>hello {user.name}</h1>
-          <UserCard />
-          <hr />
-          {!user.session_id && <Setup />}
-        </>
-    )
+  return(
+      <>
+        {!user && navigate('/')}      
+        <h1>hello {user && user.name}</h1>
+        {user && <UserCard />}
+        <hr />
+        {session && user && user.session_id ? <NameDisplays /> : <Setup />}
+      </>
+  )
 }

@@ -21,11 +21,11 @@ def send_index(request):
 def curr_user(request):
     
     if request.user.is_authenticated:
-        print('curr_user function call:', request.user.username)
-        user_info = serialize("json",  [request.user], fields = ['id', 'name', 'email', 'username', 'session_id', 'other_parent', 'parent_num', 'session_invite', 'baby_gender'])
+        user_info = serialize("json",  [request.user], fields = ['pk', 'name', 'email', 'username', 'session_id', 'other_parent', 'parent_num', 'session_invite', 'baby_gender'])        
         user_info_workable = json.loads(user_info)
+        user_info_workable[0]['fields']['pk'] = user_info_workable[0]['pk']
+        
         return JsonResponse(user_info_workable[0]['fields'])
-
     else:
         return JsonResponse({"user":None})
     
@@ -53,7 +53,7 @@ def login_user(request):
     password = request.data['password']
 
     user = authenticate(username = email, password = password)
-    print(user)
+    # print(user)
 
     if user is not None and user.is_active:
         try:
@@ -108,9 +108,9 @@ def invite_accept(request):
         invitee = App_User.objects.get(username = request.data['invitee'])
         inviter = App_User.objects.get(username = request.data['inviter'])
 
-        print('action: ', action)
-        print('invitee before: \n', invitee)
-        print('inviter before: \n', inviter)
+        # print('action: ', action)
+        # print('invitee before: \n', invitee)
+        # print('inviter before: \n', inviter)
         
         if action == 'accept':
             invitee.session_id = inviter.session_id
@@ -125,8 +125,8 @@ def invite_accept(request):
             inviter.save()
 
             
-            print('invitee: after\n', invitee)
-            print('inviter: after\n', inviter)
+            # print('invitee: after\n', invitee)
+            # print('inviter: after\n', inviter)
 
             return JsonResponse({'action': 'accepted'})
             
@@ -138,14 +138,14 @@ def invite_accept(request):
             inviter.baby_gender = None
             inviter.save()
 
-            print(action)
-            print('invitee: after\n', invitee)
-            print('inviter: after\n', inviter)
+            # print(action)
+            # print('invitee: after\n', invitee)
+            # print('inviter: after\n', inviter)
 
             return JsonResponse({'action': 'rejected'})
 
     except Exception as e:
-        print(e)
+        print('error: ',e)
         return JsonResponse({'success': False})
 
 @api_view(["GET"])

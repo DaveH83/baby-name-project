@@ -16,4 +16,10 @@ class App_User(AbstractUser):
     REQUIRED_FIELDS = ['username']
 
     def __str__(self):
-        return f"**************\nuser e-mail address: {self.email}\nuser name: {self.name}\nsession_id: {self.session_id}\nother parent: {self.other_parent}\nsession invite: {self.session_invite}\nbaby gender: {self.baby_gender}\n**************"
+        
+        #basic __str__ return statement
+        return f"{self.name} | {self.username}"
+
+
+        # Detailed __str__ return statement
+        # return f"**************\nuser id: {self.pk}\nuser e-mail address: {self.email}\nuser name: {self.name}\nsession_id: {self.session_id}\nother parent: {self.other_parent}\nsession invite: {self.session_invite}\nbaby gender: {self.baby_gender}\n**************"
