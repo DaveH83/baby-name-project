@@ -5,6 +5,7 @@ import { Authenticate } from "./pages/Authenticate";
 // import { Register } from "./pages/Register"
 import { Homepage} from "./pages/Homepage"
 import { Setup } from "./components/Setup"
+import { Namepage } from "./pages/Namepage";
 
 const Router = createHashRouter([{
     path: '/',
@@ -34,6 +35,10 @@ const Router = createHashRouter([{
             path: '/setup/',
             element: <Setup />
         },
+        {
+            path: '/names/',
+            element: <Namepage />
+        }
     ]
 }])
 

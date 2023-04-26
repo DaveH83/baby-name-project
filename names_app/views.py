@@ -29,8 +29,8 @@ def get_session(request):
             
             session_data.append(session_info_workable[0]['fields'])
 
-        print('return: ',session_data)
-        print('\n')
+        # print('return: ',session_data)
+        # print('\n')
 
         return JsonResponse({'session':session_data}) 
 
