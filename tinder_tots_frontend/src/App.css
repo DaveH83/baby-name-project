@@ -1,3 +1,5 @@
+
+
 .row-container{
   display: flex;
   flex-direction: row;
@@ -7,4 +9,9 @@
   text-align:left;
   padding: 5px;
   margin: 5px;
+}
+
+.center-align{
+  text-align:center;
+  
 }

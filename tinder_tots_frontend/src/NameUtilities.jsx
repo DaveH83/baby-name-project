@@ -1,15 +1,17 @@
 import axios from 'axios'
 
 
-export const getNames = async(gender, sort) => {
+export const getNames = async(gender, sort, user) => {
     
     let response = await axios.post('/app/getnames/' , {
         'gender': gender,
-        'sort': sort
+        'sort': sort,
+        'user': user
     })
     
     return response.data.names
 }
+
 
 export const getSession = async (user) => {
     
@@ -20,4 +22,15 @@ export const getSession = async (user) => {
 
         return response.data.session
     }
+}
+
+
+export const updateSession = async (sessionUpdate) => {
+
+    let response = await axios.post('app/updatesession/', {
+        'update': sessionUpdate
+    })
+    console.log(sessionUpdate)
+    console.log(response.data)
+    return 'updateSession called'
 }
