@@ -38,7 +38,7 @@ export const logoutUser = async(setUser) => {
 
 
 export const createSession = async(gender, otherParent, user) =>{
-    console.log(gender, otherParent, user.name)
+    // console.log(gender, otherParent, user.name)
     let response = await axios.post('user/createsession/', {
         'username': user.email,
         'gender': gender,
@@ -57,7 +57,7 @@ export const acceptInvite = async(invitee, inviter) =>{
         'action': 'accept',
     })
     
-    console.log(response.data)
+    // console.log(response.data)
 }
 
 
@@ -68,8 +68,8 @@ export const rejectInvite = async(invitee, inviter, setUpdate, update) =>{
         'inviter': inviter,
         'action': 'reject',
     })
-    console.log(response.data)
-    setUpdate(!update)
+    // console.log(response.data)
+    
 }
 
 

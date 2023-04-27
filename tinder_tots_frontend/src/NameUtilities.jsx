@@ -1,12 +1,23 @@
 import axios from 'axios'
 
 
-export const pullNames = async(gender, sort) => {
+export const getNames = async(gender, sort) => {
+    
     let response = await axios.post('/app/getnames/' , {
         'gender': gender,
         'sort': sort
     })
-    // console.log(response.data.logged_in)
-    return response.data
+    
+    return response.data.names
 }
 
+export const getSession = async (user) => {
+    
+    if(user){
+        let response = await axios.post('/app/getsession/', {
+            'user': user
+        })
+
+        return response.data.session
+    }
+}
