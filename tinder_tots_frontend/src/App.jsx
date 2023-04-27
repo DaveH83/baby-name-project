@@ -5,6 +5,7 @@ import { currUser } from './Utilities'
 import { getNames, getSession } from './NameUtilities'
 import { getToken } from './components/CsrfToken'
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const UserContext = createContext(null)
 export const NameContext = createContext(null)
@@ -16,7 +17,6 @@ function App() {
   const [update, setUpdate] = useState(false)
   const [nameList, setNameList] = useState([])
   const [session, setSession] = useState([])
-  
   
   getToken()
 
@@ -32,7 +32,7 @@ function App() {
   useEffect(() => {
     if(user){
       const getNameList = async (user) => {
-        setNameList(await getNames(user.baby_gender, 'popularity'))
+        setNameList(await getNames(user.baby_gender, 'popularity', user))
       }
       getNameList(user)
     }
@@ -64,7 +64,7 @@ function App() {
     
   // }, [nameList]  )
   
-  console.log(user)
+  // console.log(user)
 
   return (
     <div className="App">
