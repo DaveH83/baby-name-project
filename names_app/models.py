@@ -5,7 +5,7 @@ from user_app.models import App_User
 
 class Baby_Names(models.Model):
     name = models.CharField(max_length=255, null = False, blank = False, unique = True)
-    popularity = models.IntegerField(null = False, blank = False)
+    popularity = models.IntegerField(null = True, blank = True)
     gender = models.CharField(max_length=1, null = False, blank = False)
 
     def __str__(self):
