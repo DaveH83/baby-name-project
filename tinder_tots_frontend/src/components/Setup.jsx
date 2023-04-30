@@ -23,7 +23,7 @@ export const Setup = () => {
                 onSubmit={(e) => [
                     e.preventDefault(),
                     createSession(gender, otherParent, user),
-                    navigate('/home/')
+                    window.location.reload()
                 ]}
                 >
                 <h3>Choose Boy or Girl names</h3>

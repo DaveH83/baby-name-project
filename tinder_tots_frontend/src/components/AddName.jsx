@@ -21,12 +21,12 @@ export default function ManualAddName(){
         <Form onSubmit={(e) => [
             e.preventDefault(),
             submitName(name, gender, user),
-            setName(null),
+            setName(''),
             setGender(null),
         ]}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Manually Submit Baby Name</Form.Label>
-                <Form.Control type="baby_name" placeholder="Enter Baby Name" onChange={(e) => setName(e.target.value)}/>
+                <Form.Control type="baby_name" placeholder="Enter Baby Name" value={name} onChange={(e) => setName(e.target.value)}/>
                 <Form.Text className="text-muted">
                     If you're not seeing the name you want, entering it manually will make it visible to your partner parent, even if they don't add it themselves
                  </Form.Text>

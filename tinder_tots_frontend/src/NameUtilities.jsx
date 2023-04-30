@@ -30,8 +30,8 @@ export const updateSession = async (sessionUpdate) => {
     let response = await axios.post('app/updatesession/', {
         'update': sessionUpdate
     })
-    console.log(sessionUpdate)
-    console.log(response.data)
+    // console.log(sessionUpdate)
+    // console.log(response.data)
     return 'updateSession called'
 }
 
@@ -41,8 +41,10 @@ export const getNicknames = async(name, user) => {
         'name': name,
         'gender': user.baby_gender
     })
-    // console.log(response.data.names)
+    
+    
     return response.data.names
+    
 }
 
 
