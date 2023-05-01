@@ -4,6 +4,7 @@ import { UserContext, NameContext } from "../App"
 import { Setup } from "../components/Setup"
 import UserCard from "../components/UserCard"
 import NameDisplays from "../components/NameDisplays"
+import ManualAddName from "../components/AddName"
 
 export const Homepage = () => {
 
@@ -16,6 +17,7 @@ export const Homepage = () => {
         {!user && navigate('/')}      
         <h1>hello {user && user.name}</h1>
         {user && <UserCard />}
+        <ManualAddName />
         <hr />
         {session && user && user.session_id ? <NameDisplays /> : <Setup />}
       </>

@@ -34,3 +34,28 @@ export const updateSession = async (sessionUpdate) => {
     console.log(response.data)
     return 'updateSession called'
 }
+
+
+export const getNicknames = async(name, user) => {
+    let response = await axios.post('/app/nicknames/', {
+        'name': name,
+        'gender': user.baby_gender
+    })
+    // console.log(response.data.names)
+    return response.data.names
+}
+
+
+export const submitName = async(name, gender, user) => {
+
+    let response = await axios.post('/app/submitname/', {
+        'name': name,
+        'gender': gender,
+        'user': user,
+    })
+
+    console.log(response)
+
+    return response.data
+
+}
