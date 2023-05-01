@@ -1,3 +1,6 @@
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card'
+import ListGroup from 'react-bootstrap/ListGroup';
 import { useContext, useEffect, useState} from "react"
 import { useNavigate } from "react-router-dom"
 import { UserContext, NameContext } from "../App"
@@ -28,6 +31,7 @@ export const Namepage = () => {
     useEffect(() => {
         if(nameList.length > 0 && index < nameList.length){
             setDisplayName(nameList[index].name)
+            // console.log(index, nameList.length)
         }else if(index >= nameList.length - 1){
             setDisplayName(theEnd)
         }
@@ -47,7 +51,7 @@ export const Namepage = () => {
 
 
     const likeName = (displayName) => {
-        console.log('liked the name ', displayName)
+        // console.log('liked the name ', displayName)
         
         if(nameList.length > 0){
             
@@ -64,7 +68,7 @@ export const Namepage = () => {
     }
 
     const dislikeName = (displayName) => {
-        console.log('disliked the name ', displayName)
+        // console.log('disliked the name ', displayName)
 
         if(nameList.length > 0){
             
@@ -81,27 +85,29 @@ export const Namepage = () => {
     }
 
     return(
-        <>
-            <h3>{displayName}</h3>
-            {nicknames && displayName != theEnd &&
-            <div><h4>Potential Nicknames:</h4>
-            <ul>
-                {nicknames.names.map((names) => (
-                    <li>{names}</li>
-                ))}
-            </ul>
-            </div>}
-            { displayName != theEnd &&
-            <>    
-                <button onClick={() => likeName(displayName)}>Like</button>
-                <button onClick={() => dislikeName(displayName)}>Dislike</button>
-            </>
-            }
-            
-        
-        
-        
-        </>
+        <div className='top-container'>
+           
+           <div className='name-nickname'>
+                <div className='display-name'><h1>{displayName}</h1><hr/></div>
+                {displayName != theEnd && <div>
+                    <h4>NICKNAMES:</h4>
+                    <br/>
+                    <ul className='nicknames'>
+                    {nicknames && nicknames.names.map((names) => (
+                    <li><span>{names}</span></li>
+                    ))}
+                    </ul>
+                </div>}
+           </div>
+                { displayName != theEnd &&
+                    <div className='like-dislike'>
+                        <Button variant='success' onClick={() => likeName(displayName)}>Like</Button>
+                        <Button variant='danger' onClick={() => dislikeName(displayName)}>Dislike</Button>
+                    </div>
+                   
+                }
+           
+        </div>
 
 
     )

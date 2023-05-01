@@ -49,11 +49,11 @@ export const NavBar = () => {
             </Navbar.Brand>
                 <Nav className="me-auto center-align">
                     <Nav.Link href="#/names/">Swyper</Nav.Link>   
-                    <Nav.Link href="#/ranker/">Ranker</Nav.Link>  
+                    <Nav.Link href="#/rank/">Ranker</Nav.Link>  
                     {user && <Nav.Link onClick={()=>[
-                logoutUser(setUser),
-                navigate('/')
-                ]}>Logout</Nav.Link>}
+                        logoutUser(setUser),
+                        navigate('/')
+                    ]}>Logout</Nav.Link>}
                 </Nav>
             </Container>
         </Navbar>

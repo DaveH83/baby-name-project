@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-
 export const currUser = async() =>{
     let response = await axios.get('/user/curruser/')
     // console.log(response.data)
@@ -24,8 +23,14 @@ export const loginUser = async(email, password, setUser) => {
         'email': email,
         'password': password
     })
-    // console.log(response.data.logged_in)
+    // console.log(response.data)
     setUser(response.data)
+    if(response.data.logged_in == true){
+        return true
+    }else{
+        return false
+    }
+    
 }
 
 
@@ -75,6 +80,6 @@ export const rejectInvite = async(invitee, inviter, setUpdate, update) =>{
 
 export const getDadJoke = async() => {
     let response = await axios.get('/user/dadjoke/')
-    
+    console.log(response.data.joke)
     return response.data.joke
 }

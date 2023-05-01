@@ -135,17 +135,31 @@ def update_session(request):
 @api_view(["POST"])
 def get_nicknames(request):
     
-    api_key = os.environ['nickname_api_key']
-    name = request.data['name']
-    gender = request.data['gender']
+    try:
+        api_key = os.environ['nickname_api_key']
+        name = request.data['name']
+        gender = request.data['gender']
 
-    api_url = f'https://www.behindthename.com/api/related.json?name={name}&usage=eng&gender={gender}&key={api_key}'
+        api_url = f'https://www.behindthename.com/api/related.json?name={name}&usage=eng&gender={gender}&key={api_key}'
 
-    response = requests.get(api_url)
+        response = requests.get(api_url)
 
-    nicknames = json.loads(response.text)
+        print(response.text)
+        
+        nicknames = json.loads(response.text)
 
-    return JsonResponse({'names':nicknames})
+        print(nicknames)
+
+        if nicknames['names']:
+            return JsonResponse({'names':nicknames})
+        elif nicknames['names'] == []:
+            return JsonResponse({'names':{'names':['No nicknames available']}})
+        
+
+    
+    except Exception as e:
+        print(e)
+        return JsonResponse({'names':None})
 
 
 @api_view(["POST"])

@@ -52,13 +52,16 @@ def login_user(request):
     email = request.data['email']
     password = request.data['password']
 
+    print(request.data)
+
     user = authenticate(username = email, password = password)
-    # print(user)
+    print(user)
 
     if user is not None and user.is_active:
         try:
             login(request._request, user)
             return JsonResponse({"logged_in":True})
+        
         except Exception as e:
             print(e)
             return JsonResponse({"logged_in":False})
@@ -68,6 +71,7 @@ def login_user(request):
 def logout_user(request):
     try:
         logout(request)
+        print('logged out')
         return JsonResponse({"logged_out": True})
     
     except Exception as e:
@@ -87,6 +91,7 @@ def create_session(request):
                 
         user.session_id = int(f"{user.id}{user2.id}")
         user.baby_gender = gender
+        user.session_invite = 'sent'
         user.save()
 
         user2.session_invite = user.username
@@ -155,10 +160,11 @@ def dad_joke(request):
     response = requests.get(api_url, headers={'X-Api-Key': os.environ['dad_joke_api_key']})
     
     if response.status_code == requests.codes.ok:
-        joke = response.text.split(':', 1)
-        joke = joke[1].split('}')
-                
-        return JsonResponse({'joke': joke[0]})
+        joke = json.loads(response.text)
+        # joke = response.text.split(':', 1)
+        # joke = joke[1].split('}')
+        print(joke[0]['joke'])
+        return JsonResponse({'joke': joke[0]['joke']})
     else:
         print("Error:", response.status_code, response.text)
         return JsonResponse({"dad_joke":["Error", response.status_code]})
